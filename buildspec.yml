@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.x
+    commands:
+      - echo Nothing to install
+
+  build:
+    commands:
+      - echo Starting deployment to Plesk server...
+      - scp -i /home/ec2-user/PleskServer.pem *.html *.css *.js *.txt ubuntu@ec2-18-134-80-13.eu-west-2.compute.amazonaws.com:/var/www/vhosts/festivalsandeventsgroup.co.uk/httpdocs/
+
+  post_build:
+    commands:
+      - echo Deployment finished successfully
+
+artifacts:
+  files:
+    - '**/*'
